@@ -10,6 +10,7 @@ import Profile from './pages/profile'
 import NotFound from './pages/notfound'
 import Home from './pages/home'
 import About from '@/pages/about'
+import Provider from '@/components/provider'
 
 
 
@@ -20,7 +21,9 @@ const routes = [
     children: [
         {
           index: true,
-          element: <Home/>
+          element: <Provider>
+                      <Home/>
+                  </Provider> 
         },
         {
           path: "auth",
@@ -31,17 +34,24 @@ const routes = [
               element: <Login/>
             },
             {
-              path: "register/*",
-              element: <Register/>
-            },
-            {
-              path: "profile",
-              element: <Profile />,
-              children: [
+              path: "register",
+              element: <Register/>,
+              children:[
                 {
-                  path: "security"
+                  path: "*"
                 }
               ]
+            },
+          ]
+        },
+        {
+          path: "profile",
+          element: <Provider>
+            <Profile />
+          </Provider>,
+          children: [
+            {
+              path: "security"
             }
           ]
         },

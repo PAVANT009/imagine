@@ -27,6 +27,8 @@ import { StrictMode } from 'react'
   import './index.css'
   import App from './App.jsx'
   import { ClerkProvider } from '@clerk/clerk-react'
+  import {shadcn} from "@clerk/themes"
+import { ThemeProvider } from '@/components/theme-provider'
 
   // Import your Publishable Key
   const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -38,9 +40,14 @@ import { StrictMode } from 'react'
   createRoot(document.getElementById('root')).render(
     <StrictMode>
       <ClerkProvider 
+        appearance={{
+          theme: shadcn
+        }}
         publishableKey={PUBLISHABLE_KEY}
         >
-        <App />
+          <ThemeProvider defaultTheme='system'> 
+            <App />
+          </ThemeProvider>
       </ClerkProvider>
     </StrictMode>,
   )
